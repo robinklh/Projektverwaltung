@@ -10,7 +10,7 @@
    <children>
       <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="220.0" layoutY="46.0" prefHeight="39.0" prefWidth="167.0" text="Hans Wurscht" />
       <ListView fx:id="listViewPerson" layoutX="90.0" layoutY="95.0" prefHeight="485.0" prefWidth="260.0" />
-      <Button fx:id="btnNew" layoutX="266.0" layoutY="601.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Neu" />
+      <Button fx:id="btnNew" layoutX="238.0" layoutY="594.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="53.0" text="Neu" />
       <SplitPane dividerPositions="0.5063291139240507" layoutX="10.0" layoutY="9.0" orientation="VERTICAL" prefHeight="81.0" prefWidth="160.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -25,5 +25,6 @@
             </AnchorPane>
         </items>
       </SplitPane>
+      <Button fx:id="btnBack" layoutX="298.0" layoutY="594.0" mnemonicParsing="false" text="Zurück" />
    </children>
 </AnchorPane>
