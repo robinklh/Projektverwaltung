@@ -1,6 +1,6 @@
 package controller;
 
-public class SampleController {
+public class ProfMainController {
 	public void test(){
 		
 	}
