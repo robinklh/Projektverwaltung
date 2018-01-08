@@ -3,22 +3,25 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Ansprechpartner für ein Projekt. Kann Dozent der Hochschule oder externer
  * Partner aus der Industrie sein.
  */
 public class Ansprechpartner
 {
-   private String nachname;
+   private SimpleStringProperty nachname;
 
-   private String vorname;
+   private SimpleStringProperty vorname;
+
+   private SimpleStringProperty contact;
 
    private Organisation organisation;
 
    private Collection<Projekt> projekte;
 
-   public Ansprechpartner(String vorname, String nachname,
-         Organisation organisation)
+   public Ansprechpartner(String vorname, String nachname, String contact)
    {
       if (nachname == null || nachname.isEmpty())
       {
@@ -28,21 +31,17 @@ public class Ansprechpartner
       {
          throw new IllegalArgumentException("Ungültiger Vorname.");
       }
-      if (organisation == null)
-      {
-         throw new IllegalArgumentException("Ungültige Organisation.");
-      }
-      this.vorname = vorname;
-      this.nachname = nachname;
-      this.organisation = organisation;
-      this.organisation.addMitglieder(this);
+
+      this.contact = new SimpleStringProperty(contact);
+      this.vorname = new SimpleStringProperty(vorname);
+      this.nachname = new SimpleStringProperty(nachname);
       this.projekte = new ArrayList<Projekt>();
    }
 
    // Setter Getter Name
    public String getNachname()
    {
-      return nachname;
+      return nachname.get();
    }
 
    public void setNachname(String name)
@@ -51,7 +50,7 @@ public class Ansprechpartner
       {
          throw new IllegalArgumentException("Ungültiger name");
       }
-      this.nachname = name;
+      this.nachname = new SimpleStringProperty(name);
    }
 
    // Setter Getter Organisation
@@ -95,7 +94,7 @@ public class Ansprechpartner
 
    public String getVorname()
    {
-      return vorname;
+      return vorname.get();
    }
 
    public void setVorname(String vorname)
@@ -104,7 +103,21 @@ public class Ansprechpartner
       {
          throw new IllegalArgumentException("Ungültiger Vorname");
       }
-      this.vorname = vorname;
+      this.vorname = new SimpleStringProperty(vorname);
+   }
+
+   public String getContact()
+   {
+      return contact.get();
+   }
+
+   public void setContact(String contact)
+   {
+      if (contact == null || contact.isEmpty())
+      {
+         throw new IllegalArgumentException("Ungültiger Vorname");
+      }
+      this.contact = new SimpleStringProperty(contact);
    }
 
 }

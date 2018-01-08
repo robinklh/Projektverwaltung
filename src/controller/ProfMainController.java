@@ -11,30 +11,53 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class ProfMainController implements Initializable {
-	@FXML
-	Button btnProposal;
-	@FXML
-	Button btnProject;
-	@FXML
-	Button btnStudents;
-	@FXML
-	Button btnCompany;
-	@FXML
-	Button btnMeeting;
+public class ProfMainController implements Initializable
+{
+   @FXML
+   private Button btnProposal;
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		btnStudents.setOnAction(e -> {
+   @FXML
+   private Button btnProject;
 
-			try {
-				Scene scene = btnStudents.getScene();
-				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowStudents.fxml"));
-				scene.setRoot(root);
-			} catch (IOException e1) {
+   @FXML
+   private Button btnStudents;
 
-				e1.printStackTrace();
-			}
-		});
-	}
+   @FXML
+   private Button btnCompany;
+
+   @FXML
+   private Button btnMeeting;
+
+   @Override
+   public void initialize(URL location, ResourceBundle resources)
+   {
+      btnStudents.setOnAction(e -> {
+         try
+         {
+            Scene scene = btnStudents.getScene();
+            AnchorPane root = FXMLLoader
+                  .load(getClass().getResource("../view/ShowStudents.fxml"));
+            scene.setRoot(root);
+         }
+         catch (IOException e1)
+         {
+            e1.printStackTrace();
+         }
+      });
+
+      btnCompany.setOnAction(e -> {
+         try
+         {
+            Scene scene = btnStudents.getScene();
+            AnchorPane root = FXMLLoader
+                  .load(getClass().getResource("../view/ShowCompany.fxml"));
+            scene.setRoot(root);
+         }
+         catch (IOException e1)
+         {
+            e1.printStackTrace();
+         }
+      });
+
+   }
 }

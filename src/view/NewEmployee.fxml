@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewCompanyController">
    <children>
       <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="220.0" layoutY="46.0" prefHeight="39.0" prefWidth="167.0" text="Hans Wurscht" />
       <Button fx:id="btnSave" layoutX="262.0" layoutY="286.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Speichern" />

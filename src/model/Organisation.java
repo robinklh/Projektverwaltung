@@ -1,6 +1,9 @@
 package model;
+
 import java.util.ArrayList;
 import java.util.Collection;
+
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Eine Organisation die einen Ansprechpartner für Projekte beschäftigt. Kann
@@ -10,7 +13,7 @@ public class Organisation
 {
    private Collection<Ansprechpartner> mitglieder;
 
-   private String name;
+   private SimpleStringProperty name;
 
    public Organisation(String name)
    {
@@ -18,7 +21,7 @@ public class Organisation
       {
          throw new IllegalArgumentException("Ungültiger Organisationsname.");
       }
-      this.name = name;
+      this.name = new SimpleStringProperty(name);
       this.mitglieder = new ArrayList<>();
    }
 
@@ -47,7 +50,7 @@ public class Organisation
 
    public String getName()
    {
-      return name;
+      return name.get();
    }
 
    public void setName(String name)
@@ -56,7 +59,7 @@ public class Organisation
       {
          throw new IllegalArgumentException("Ungültiger Organisationsname.");
       }
-      this.name = name;
+      this.name = new SimpleStringProperty(name);
    }
 
 }

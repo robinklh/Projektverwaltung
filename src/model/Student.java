@@ -1,23 +1,27 @@
 package model;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Student einer Hochschule. Bearbeitet bei einem Ansprechpartner ein Projekt.
  */
 
 public class Student
 {
-   private String vorname;
+   private SimpleStringProperty vorname;
 
-   private String nachname;
+   private SimpleStringProperty nachname;
 
-   private int matrikelnummer;
+   private SimpleIntegerProperty matrikelnummer;
 
-   private String mail;
+   private SimpleStringProperty mail;
 
    private Projekt projekt;
 
    public Student(String vorname, String nachname, int matrikelnummer)
    {
+      super();
       if (vorname == null || vorname.isEmpty())
       {
          throw new IllegalArgumentException("Ungültiger Vorname");
@@ -30,15 +34,15 @@ public class Student
       {
          throw new IllegalArgumentException("Üngültige Matrikelnummer");
       }
-      this.vorname = vorname;
-      this.nachname = nachname;
-      this.matrikelnummer = matrikelnummer;
+      this.vorname = new SimpleStringProperty(vorname);
+      this.nachname = new SimpleStringProperty(nachname);
+      this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
    }
 
    // Setter Getter Vorname
    public String getVorname()
    {
-      return vorname;
+      return vorname.get();
    }
 
    public void setVorname(String vorname)
@@ -47,13 +51,13 @@ public class Student
       {
          throw new IllegalArgumentException("Ungültiger Vorname");
       }
-      this.vorname = vorname;
+      this.vorname = new SimpleStringProperty(vorname);
    }
 
    // Setter Getter Nachname
    public String getNachname()
    {
-      return nachname;
+      return nachname.get();
    }
 
    public void setNachname(String nachname)
@@ -62,13 +66,13 @@ public class Student
       {
          throw new IllegalArgumentException("Ungültiger Nachname");
       }
-      this.nachname = nachname;
+      this.nachname = new SimpleStringProperty(nachname);
    }
 
    // Setter Getter Matrikelnummer
-   public int getMatrikelnummer()
+   public Integer getMatrikelnummer()
    {
-      return matrikelnummer;
+      return matrikelnummer.intValue();
    }
 
    public void setMatrikelnummer(int matrikelnummer)
@@ -77,13 +81,13 @@ public class Student
       {
          throw new IllegalArgumentException("Ungültiger Student");
       }
-      this.matrikelnummer = matrikelnummer;
+      this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
    }
 
    // Setter Getter Mail
    public String getMail()
    {
-      return mail;
+      return mail.get();
    }
 
    public void setMail(String mail)
@@ -92,7 +96,7 @@ public class Student
       {
          throw new IllegalArgumentException("Ungültige Mail");
       }
-      this.mail = mail;
+      this.mail = new SimpleStringProperty(mail);
    }
 
    // Setter Getter Projekt

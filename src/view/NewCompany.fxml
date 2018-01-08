@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NewCompanyController">
    <children>
       <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="220.0" layoutY="46.0" prefHeight="39.0" prefWidth="167.0" text="Hans Wurscht" />
       <GridPane layoutX="77.0" layoutY="89.0" prefHeight="270.0" prefWidth="287.0">
@@ -20,26 +20,23 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label prefHeight="17.0" prefWidth="148.0" text="Vorname" GridPane.rowIndex="1" />
-            <Label prefHeight="17.0" prefWidth="154.0" text="Postleitzahl" GridPane.rowIndex="2" />
-            <Label prefHeight="17.0" prefWidth="146.0" text="Stadt" GridPane.rowIndex="3" />
-            <Label prefHeight="17.0" prefWidth="158.0" text="Straße" GridPane.rowIndex="4" />
-            <Label prefHeight="17.0" prefWidth="158.0" text="Hausnummer" GridPane.rowIndex="5" />
-            <Label prefHeight="17.0" prefWidth="154.0" text="Kontakt" GridPane.rowIndex="6" />
+            <Label prefHeight="17.0" prefWidth="154.0" text="Postleitzahl" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="146.0" text="Stadt" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="158.0" text="Straße" GridPane.rowIndex="3" />
+            <Label prefHeight="17.0" prefWidth="158.0" text="Hausnummer" GridPane.rowIndex="4" />
+            <Label prefHeight="17.0" prefWidth="154.0" text="Kontakt" GridPane.rowIndex="5" />
             <Label prefHeight="17.0" prefWidth="149.0" text="Name" />
             <TextField fx:id="txtfieldName" GridPane.columnIndex="1" />
-            <TextField fx:id="txtfieldPrename" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="txtfieldPlz" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="txtfieldCity" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="txtfieldStreet" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <TextField fx:id="txtfieldHousenumber" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <TextField fx:id="txtfieldContact" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="txtfieldPlz" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="txtfieldCity" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="txtfieldStreet" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="txtfieldHousenumber" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txtfieldContact" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>
       </GridPane>
       <Button fx:id="btnSave" layoutX="285.0" layoutY="376.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="79.0" text="Speichern" />
