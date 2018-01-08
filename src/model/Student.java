@@ -1,4 +1,4 @@
-package application;
+package model;
 
 /**
  * Student einer Hochschule. Bearbeitet bei einem Ansprechpartner ein Projekt.
