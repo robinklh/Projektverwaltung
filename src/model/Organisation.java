@@ -3,63 +3,64 @@ package model;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import javafx.beans.property.SimpleStringProperty;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Eine Organisation die einen Ansprechpartner für Projekte beschäftigt. Kann
  * eine Hochschule oder ein Unternehmen aus der Industrie sein.
  */
-public class Organisation
-{
-   private Collection<Ansprechpartner> mitglieder;
+@Entity
+public class Organisation {
 
-   private SimpleStringProperty name;
+	@Id
+	@GeneratedValue
+	private Integer organisation_id;
 
-   public Organisation(String name)
-   {
-      if (name == null || name.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültiger Organisationsname.");
-      }
-      this.name = new SimpleStringProperty(name);
-      this.mitglieder = new ArrayList<>();
-   }
+	@OneToMany
+	private Collection<Ansprechpartner> mitglieder;
 
-   public Collection<Ansprechpartner> getMitglieder()
-   {
-      return mitglieder;
-   }
+	@Column
+	private String name;
 
-   public void addMitglieder(Ansprechpartner mitglied)
-   {
-      if (mitglied == null || mitglieder.contains(mitglied))
-      {
-         throw new IllegalArgumentException("Ungültige Mitgliederliste.");
-      }
-      this.mitglieder.add(mitglied);
-   }
+	public Organisation(String name) {
+		if (name == null || name.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Organisationsname.");
+		}
+		this.name = name;
+		this.mitglieder = new ArrayList<>();
+	}
 
-   public void removeMitglieder(Ansprechpartner mitglied)
-   {
-      if (mitglied == null || !mitglieder.contains(mitglied))
-      {
-         throw new IllegalArgumentException("Ungültige Mitgliederliste.");
-      }
-      this.mitglieder.remove(mitglied);
-   }
+	public Collection<Ansprechpartner> getMitglieder() {
+		return mitglieder;
+	}
 
-   public String getName()
-   {
-      return name.get();
-   }
+	public void addMitglieder(Ansprechpartner mitglied) {
+		if (mitglied == null || mitglieder.contains(mitglied)) {
+			throw new IllegalArgumentException("Ungültige Mitgliederliste.");
+		}
+		this.mitglieder.add(mitglied);
+	}
 
-   public void setName(String name)
-   {
-      if (name == null || name.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültiger Organisationsname.");
-      }
-      this.name = new SimpleStringProperty(name);
-   }
+	public void removeMitglieder(Ansprechpartner mitglied) {
+		if (mitglied == null || !mitglieder.contains(mitglied)) {
+			throw new IllegalArgumentException("Ungültige Mitgliederliste.");
+		}
+		this.mitglieder.remove(mitglied);
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		if (name == null || name.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Organisationsname.");
+		}
+		this.name = name;
+	}
 
 }

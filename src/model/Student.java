@@ -1,117 +1,112 @@
 package model;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * Student einer Hochschule. Bearbeitet bei einem Ansprechpartner ein Projekt.
  */
+@Entity
+public class Student implements Serializable {
 
-public class Student
-{
-   private SimpleStringProperty vorname;
+	private static final long serialVersionUID = -5523554653298279742L;
 
-   private SimpleStringProperty nachname;
+	@Column
+	private String vorname;
 
-   private SimpleIntegerProperty matrikelnummer;
+	@Column
+	private String nachname;
 
-   private SimpleStringProperty mail;
+	@Id
+	@Column
+	private Integer matrikelnummer;
 
-   private Projekt projekt;
+	@Column
+	private String mail;
 
-   public Student(String vorname, String nachname, int matrikelnummer)
-   {
-      super();
-      if (vorname == null || vorname.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültiger Vorname");
-      }
-      if (nachname == null || nachname.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültiger Nachname");
-      }
-      if (matrikelnummer < 1)
-      {
-         throw new IllegalArgumentException("Üngültige Matrikelnummer");
-      }
-      this.vorname = new SimpleStringProperty(vorname);
-      this.nachname = new SimpleStringProperty(nachname);
-      this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
-   }
+	@ManyToOne
+	@JoinColumn(name = "projekt_id")
+	private Projekt projekt;
 
-   // Setter Getter Vorname
-   public String getVorname()
-   {
-      return vorname.get();
-   }
+	public Student(String vorname, String nachname, int matrikelnummer) {
+		super();
+		if (vorname == null || vorname.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Vorname");
+		}
+		if (nachname == null || nachname.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Nachname");
+		}
+		if (matrikelnummer < 1) {
+			throw new IllegalArgumentException("Üngültige Matrikelnummer");
+		}
+		this.vorname = vorname;
+		this.nachname = nachname;
+		this.matrikelnummer = matrikelnummer;
+	}
 
-   public void setVorname(String vorname)
-   {
-      if (vorname == null || vorname.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültiger Vorname");
-      }
-      this.vorname = new SimpleStringProperty(vorname);
-   }
+	// Setter Getter Vorname
+	public String getVorname() {
+		return vorname;
+	}
 
-   // Setter Getter Nachname
-   public String getNachname()
-   {
-      return nachname.get();
-   }
+	public void setVorname(String vorname) {
+		if (vorname == null || vorname.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Vorname");
+		}
+		this.vorname = vorname;
+	}
 
-   public void setNachname(String nachname)
-   {
-      if (nachname == null || nachname.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültiger Nachname");
-      }
-      this.nachname = new SimpleStringProperty(nachname);
-   }
+	// Setter Getter Nachname
+	public String getNachname() {
+		return nachname;
+	}
 
-   // Setter Getter Matrikelnummer
-   public Integer getMatrikelnummer()
-   {
-      return matrikelnummer.intValue();
-   }
+	public void setNachname(String nachname) {
+		if (nachname == null || nachname.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Nachname");
+		}
+		this.nachname = nachname;
+	}
 
-   public void setMatrikelnummer(int matrikelnummer)
-   {
-      if (matrikelnummer < 1)
-      {
-         throw new IllegalArgumentException("Ungültiger Student");
-      }
-      this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
-   }
+	// Setter Getter Matrikelnummer
+	public Integer getMatrikelnummer() {
+		return matrikelnummer;
+	}
 
-   // Setter Getter Mail
-   public String getMail()
-   {
-      return mail.get();
-   }
+	public void setMatrikelnummer(int matrikelnummer) {
+		if (matrikelnummer < 1) {
+			throw new IllegalArgumentException("Ungültiger Student");
+		}
+		this.matrikelnummer = matrikelnummer;
+	}
 
-   public void setMail(String mail)
-   {
-      if (mail == null || mail.isEmpty())
-      {
-         throw new IllegalArgumentException("Ungültige Mail");
-      }
-      this.mail = new SimpleStringProperty(mail);
-   }
+	// Setter Getter Mail
+	public String getMail() {
+		return mail;
+	}
 
-   // Setter Getter Projekt
-   public Projekt getProjekt()
-   {
-      return projekt;
-   }
+	public void setMail(String mail) {
+		if (mail == null || mail.isEmpty()) {
+			throw new IllegalArgumentException("Ungültige Mail");
+		}
+		this.mail = mail;
+	}
 
-   public void setProjekt(Projekt projekt)
-   {
-      if (projekt == null)
-      {
-         throw new IllegalArgumentException("Ungültiges Projekt");
-      }
-      this.projekt = projekt;
-   }
+	// Setter Getter Projekt
+	public Projekt getProjekt() {
+		return projekt;
+	}
+
+	public void setProjekt(Projekt projekt) {
+		if (projekt == null) {
+			throw new IllegalArgumentException("Ungültiges Projekt");
+		}
+		this.projekt = projekt;
+	}
 
 }
