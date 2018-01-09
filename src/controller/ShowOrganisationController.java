@@ -19,7 +19,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Organisation;
 
-public class ShowCompanyController implements Initializable
+public class ShowOrganisationController implements Initializable
 {
    @FXML
    private Button btnBack;

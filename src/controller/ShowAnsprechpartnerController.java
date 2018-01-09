@@ -18,7 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.Ansprechpartner;
 
-public class ShowEmployeeController implements Initializable
+public class ShowAnsprechpartnerController implements Initializable
 {
    @FXML
    private Label lblCompany;
