@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  * Student einer Hochschule. Bearbeitet bei einem Ansprechpartner ein Projekt.
  */
@@ -16,22 +19,19 @@ public class Student implements Serializable {
 
 	private static final long serialVersionUID = -5523554653298279742L;
 
-	@Column
-	private String vorname;
+	private SimpleIntegerProperty matrikelnummer;
 
-	@Column
-	private String nachname;
+	private SimpleStringProperty vorname;
 
-	@Id
-	@Column
-	private Integer matrikelnummer;
+	private SimpleStringProperty nachname;
 
-	@Column
-	private String mail;
+	private SimpleStringProperty mail;
 
-	@ManyToOne
-	@JoinColumn(name = "projekt_id")
 	private Projekt projekt;
+
+	private Student() {
+		// Hier gibt es nichts zusehn.
+	}
 
 	public Student(String vorname, String nachname, int matrikelnummer) {
 		super();
@@ -44,60 +44,68 @@ public class Student implements Serializable {
 		if (matrikelnummer < 1) {
 			throw new IllegalArgumentException("Üngültige Matrikelnummer");
 		}
-		this.vorname = vorname;
-		this.nachname = nachname;
-		this.matrikelnummer = matrikelnummer;
+		this.vorname = new SimpleStringProperty(vorname);
+		this.nachname = new SimpleStringProperty(nachname);
+		this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
 	}
 
 	// Setter Getter Vorname
+	@Column
 	public String getVorname() {
-		return vorname;
+		return vorname.get();
 	}
 
 	public void setVorname(String vorname) {
 		if (vorname == null || vorname.isEmpty()) {
 			throw new IllegalArgumentException("Ungültiger Vorname");
 		}
-		this.vorname = vorname;
+		this.vorname = new SimpleStringProperty(vorname);
 	}
 
 	// Setter Getter Nachname
+	@Column
 	public String getNachname() {
-		return nachname;
+		return nachname.get();
 	}
 
 	public void setNachname(String nachname) {
 		if (nachname == null || nachname.isEmpty()) {
 			throw new IllegalArgumentException("Ungültiger Nachname");
 		}
-		this.nachname = nachname;
+		this.nachname = new SimpleStringProperty(nachname);
 	}
 
 	// Setter Getter Matrikelnummer
+	@Id
+	@Column
 	public Integer getMatrikelnummer() {
-		return matrikelnummer;
+		return matrikelnummer.getValue();
 	}
 
 	public void setMatrikelnummer(int matrikelnummer) {
 		if (matrikelnummer < 1) {
 			throw new IllegalArgumentException("Ungültiger Student");
 		}
-		this.matrikelnummer = matrikelnummer;
+		this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
 	}
 
 	// Setter Getter Mail
+	@Column
 	public String getMail() {
-		return mail;
+		return mail.get();
 	}
 
 	public void setMail(String mail) {
-		if (mail == null || mail.isEmpty()) {
-			throw new IllegalArgumentException("Ungültige Mail");
+		if (mail == null) {
+			mail = "";
 		}
-		this.mail = mail;
+		this.mail = new SimpleStringProperty(mail);
 	}
 
 	// Setter Getter Projekt
+
+	@ManyToOne
+	@JoinColumn(name = "projekt_id")
 	public Projekt getProjekt() {
 		return projekt;
 	}
