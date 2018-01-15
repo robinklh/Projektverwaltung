@@ -10,47 +10,29 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class NewOrganisationController implements Initializable
+public class StudentMainController implements Initializable
 {
-   @FXML
-   private Button btnCancel;
 
    @FXML
-   private Button btnSave;
+   Button btnProject;
+
+   @FXML
+   Button btnMeeting;
 
    @FXML
    Label lblUsername;
 
-   @FXML
-   TextField txtfieldName;
-
-   @FXML
-   TextField txtfieldPlz;
-
-   @FXML
-   TextField txtfieldCity;
-
-   @FXML
-   TextField txtfieldStreet;
-
-   @FXML
-   TextField txtfieldHousenumber;
-
-   @FXML
-   TextField txtfieldContact;
-
    @Override
    public void initialize(URL location, ResourceBundle resources)
    {
-      btnCancel.setOnAction(e -> {
+      btnProject.setOnAction(e -> {
          try
          {
-            Scene scene = btnCancel.getScene();
-            AnchorPane root = FXMLLoader.load(
-                  getClass().getResource("../view/ShowOrganisation.fxml"));
+            Scene scene = btnProject.getScene();
+            AnchorPane root = FXMLLoader
+                  .load(getClass().getResource("../view/NewProject.fxml"));
             scene.setRoot(root);
          }
          catch (IOException e1)

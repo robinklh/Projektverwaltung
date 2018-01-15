@@ -64,8 +64,8 @@ public class ShowAnsprechpartnerController implements Initializable
          try
          {
             Scene scene = btnBack.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/ShowCompany.fxml"));
+            AnchorPane root = FXMLLoader.load(
+                  getClass().getResource("../view/ShowOrganisation.fxml"));
             scene.setRoot(root);
          }
          catch (IOException e1)
@@ -78,8 +78,8 @@ public class ShowAnsprechpartnerController implements Initializable
          try
          {
             Scene scene = btnNew.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/NewEmployee.fxml"));
+            AnchorPane root = FXMLLoader.load(
+                  getClass().getResource("../view/NewAnsprechpartner.fxml"));
             scene.setRoot(root);
          }
          catch (IOException e1)

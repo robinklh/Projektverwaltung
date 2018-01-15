@@ -9,38 +9,52 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Ansprechpartner;
+import model.Student;
 
-public class NewOrganisationController implements Initializable
+public class NewProjectController implements Initializable
 {
-   @FXML
-   private Button btnCancel;
-
-   @FXML
-   private Button btnSave;
 
    @FXML
    Label lblUsername;
 
    @FXML
-   TextField txtfieldName;
+   Button btnCancel;
 
    @FXML
-   TextField txtfieldPlz;
+   Button btnSave;
 
    @FXML
-   TextField txtfieldCity;
+   TextField txtfieldTitel;
 
    @FXML
-   TextField txtfieldStreet;
+   TextArea txtAreaDescription;
 
    @FXML
-   TextField txtfieldHousenumber;
+   TextArea txtAreaSkizze;
 
    @FXML
-   TextField txtfieldContact;
+   ComboBox<Ansprechpartner> comboContact;
+
+   @FXML
+   ComboBox<Student> comboStudentOne;
+
+   @FXML
+   ComboBox<Student> comboStudentTwo;
+
+   @FXML
+   TextField txtfieldAnsprechpartner;
+
+   @FXML
+   TextField txtfieldSutdentOne;
+
+   @FXML
+   TextField txtfieldStudentTwo;
 
    @Override
    public void initialize(URL location, ResourceBundle resources)
@@ -49,8 +63,8 @@ public class NewOrganisationController implements Initializable
          try
          {
             Scene scene = btnCancel.getScene();
-            AnchorPane root = FXMLLoader.load(
-                  getClass().getResource("../view/ShowOrganisation.fxml"));
+            AnchorPane root = FXMLLoader
+                  .load(getClass().getResource("../view/StudentMain.fxml"));
             scene.setRoot(root);
          }
          catch (IOException e1)
@@ -58,6 +72,7 @@ public class NewOrganisationController implements Initializable
             e1.printStackTrace();
          }
       });
+
    }
 
 }

@@ -18,78 +18,140 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.Student;
+import javafx.scene.control.Label;
 
-public class ShowStudentsController implements Initializable {
-	@FXML
-	private Button btnBack;
+public class ShowStudentsController implements Initializable
+{
+   @FXML
+   private Button btnBack;
 
-	@FXML // Die Tabelle Selbst
-	private TableView<Student> tableStudents;
+   @FXML
+   private Button btnNew;
 
-	@FXML // Spalte Vorname
-	private TableColumn<Student, String> columnPrename;
+   @FXML
+   private Button btnEdit;
 
-	@FXML // Spalte Nachname
-	private TableColumn<Student, String> columnName;
+   @FXML
+   private Button btnDelete;
 
-	@FXML // Spalte Matrikelnummer
-	private TableColumn<Student, Integer> columnNumber;
+   @FXML // Die Tabelle Selbst
+   private TableView<Student> tableStudents;
 
-	// Hier müssen die Daten reingeladen werden Eventuell in Methode auslagern
-	public ObservableList<Student> list;
+   @FXML // Spalte Vorname
+   private TableColumn<Student, String> columnPrename;
 
-	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
-		list = FXCollections.observableArrayList(getStudents());
-		columnPrename.setCellValueFactory(new PropertyValueFactory<Student, String>("vorname"));
-		columnName.setCellValueFactory(new PropertyValueFactory<Student, String>("nachname"));
-		columnNumber.setCellValueFactory(new PropertyValueFactory<Student, Integer>("matrikelnummer"));
-		tableStudents.setItems(list);
+   @FXML // Spalte Nachname
+   private TableColumn<Student, String> columnName;
 
-		btnBack.setOnAction(e -> {
-			try {
-				Scene scene = btnBack.getScene();
-				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ProfMain.fxml"));
-				scene.setRoot(root);
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-		});
+   @FXML // Spalte Matrikelnummer
+   private TableColumn<Student, Integer> columnNumber;
 
-	}
+   // Hier müssen die Daten reingeladen werden Eventuell in Methode auslagern
+   public ObservableList<Student> list;
 
-	/**
-	 * 
-	 * @return
-	 */
-	public List<Student> getStudents() {
-		List<Student> results = new ArrayList<>();
-		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("projektverwaltung");
-		final EntityManager entityManager = entityManagerFactory.createEntityManager();
-		try {
-			entityManager.getTransaction().begin();
-			TypedQuery<Object[]> query = entityManager
-					.createQuery("SELECT s.vorname, s.nachname, s.matrikelnummer FROM Student s", Object[].class);
-			List<Object[]> resultsList = query.getResultList();
-			for (Object[] result : resultsList) {
-				results.add(new Student((String) result[0], (String) result[1], (Integer) result[2]));
-			}
+   final EntityManagerFactory entityManagerFactory = Persistence
+         .createEntityManagerFactory("projektverwaltung");
 
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-			System.out.println("there was a problem: " + e.getMessage());
+   final EntityManager entityManager = entityManagerFactory
+         .createEntityManager();
 
-		} finally {
-			entityManager.close();
-			entityManagerFactory.close();
-		}
-		return results;
-	}
+   @FXML Label lblUsername;
+
+   @Override
+   public void initialize(URL arg0, ResourceBundle arg1)
+   {
+      tableStudents.getSelectionModel()
+            .setSelectionMode(SelectionMode.SINGLE);
+      update();
+      btnBack.setOnAction(e -> {
+         try
+         {
+            Scene scene = btnBack.getScene();
+            AnchorPane root = FXMLLoader
+                  .load(getClass().getResource("../view/ProfMain.fxml"));
+            scene.setRoot(root);
+         }
+         catch (IOException e1)
+         {
+            e1.printStackTrace();
+         }
+      });
+
+      btnNew.setOnAction(e -> {
+         try
+         {
+            Scene scene = btnNew.getScene();
+            AnchorPane root = FXMLLoader
+                  .load(getClass().getResource("../view/NewStudent.fxml"));
+            scene.setRoot(root);
+         }
+         catch (IOException e1)
+         {
+            e1.printStackTrace();
+         }
+      });
+
+      btnDelete.setOnAction(e -> {
+         Student selectedStudent = tableStudents.getSelectionModel()
+               .getSelectedItem();
+         entityManager.getTransaction().begin();
+         entityManager.merge(selectedStudent);
+         entityManager.remove(selectedStudent);
+         entityManager.getTransaction().commit();
+         update();
+
+      });
+
+   }
+
+   /**
+    * 
+    * @return
+    */
+   public List<Student> getStudents()
+   {
+      List<Student> results = new ArrayList<>();
+
+      try
+      {
+         entityManager.getTransaction().begin();
+         TypedQuery<Object[]> query = entityManager.createQuery(
+               "SELECT s.vorname, s.nachname, s.matrikelnummer FROM Student s",
+               Object[].class);
+         List<Object[]> resultsList = query.getResultList();
+         for (Object[] result : resultsList)
+         {
+            results.add(new Student((String) result[0], (String) result[1],
+                  (Integer) result[2]));
+         }
+
+         entityManager.getTransaction().commit();
+      }
+      catch (Exception e)
+      {
+         entityManager.getTransaction().rollback();
+         System.out.println("there was a problem: " + e.getMessage());
+
+      }
+      return results;
+   }
+
+   private void update()
+   {
+      list = FXCollections.observableArrayList(getStudents());
+      columnPrename.setCellValueFactory(
+            new PropertyValueFactory<Student, String>("vorname"));
+      columnName.setCellValueFactory(
+            new PropertyValueFactory<Student, String>("nachname"));
+      columnNumber.setCellValueFactory(
+            new PropertyValueFactory<Student, Integer>("matrikelnummer"));
+      tableStudents.setItems(list);
+   }
 
 }

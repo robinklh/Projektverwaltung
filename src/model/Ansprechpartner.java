@@ -16,105 +16,126 @@ import javax.persistence.OneToMany;
  * Partner aus der Industrie sein.
  */
 @Entity
-public class Ansprechpartner {
+public class Ansprechpartner
+{
 
-	@Id
-	@GeneratedValue
-	private Integer ansprechpartner_id;
+   @Id
+   @GeneratedValue
+   private Integer ansprechpartner_id;
 
-	@Column
-	private String nachname;
+   @Column
+   private String nachname;
 
-	@Column
-	private String vorname;
+   @Column
+   private String vorname;
 
-	@Column
-	private String contact;
+   @Column
+   private String email;
 
-	@ManyToOne
-	@JoinColumn(name = "organisation_id")
-	private Organisation organisation;
+   @ManyToOne
+   @JoinColumn(name = "organisation_id")
+   private Organisation organisation;
 
-	@OneToMany
-	private Collection<Projekt> projekte;
+   @OneToMany
+   private Collection<Projekt> projekte;
 
-	public Ansprechpartner(String vorname, String nachname, String contact) {
-		if (nachname == null || nachname.isEmpty()) {
-			throw new IllegalArgumentException("Ungültiger Nachname.");
-		}
-		if (vorname == null || vorname.isEmpty()) {
-			throw new IllegalArgumentException("Ungültiger Vorname.");
-		}
+   public Ansprechpartner(String vorname, String nachname, String contact)
+   {
+      if (nachname == null || nachname.isEmpty())
+      {
+         throw new IllegalArgumentException("Ungültiger Nachname.");
+      }
+      if (vorname == null || vorname.isEmpty())
+      {
+         throw new IllegalArgumentException("Ungültiger Vorname.");
+      }
 
-		this.contact = contact;
-		this.vorname = vorname;
-		this.nachname = nachname;
-		this.projekte = new ArrayList<Projekt>();
-	}
+      this.email = contact;
+      this.vorname = vorname;
+      this.nachname = nachname;
+      this.projekte = new ArrayList<Projekt>();
+   }
 
-	// Setter Getter Name
-	public String getNachname() {
-		return nachname;
-	}
+   // Setter Getter Name
+   public String getNachname()
+   {
+      return nachname;
+   }
 
-	public void setNachname(String name) {
-		if (name == null || name.isEmpty()) {
-			throw new IllegalArgumentException("Ungültiger name");
-		}
-		this.nachname = name;
-	}
+   public void setNachname(String name)
+   {
+      if (name == null || name.isEmpty())
+      {
+         throw new IllegalArgumentException("Ungültiger name");
+      }
+      this.nachname = name;
+   }
 
-	// Setter Getter Organisation
-	public Organisation getOrganisation() {
-		return organisation;
-	}
+   // Setter Getter Organisation
+   public Organisation getOrganisation()
+   {
+      return organisation;
+   }
 
-	public void setOrganisation(Organisation organisation) {
-		if (organisation == null) {
-			throw new IllegalArgumentException("Ungültige Organisation");
-		}
-		this.organisation = organisation;
-	}
+   public void setOrganisation(Organisation organisation)
+   {
+      if (organisation == null)
+      {
+         throw new IllegalArgumentException("Ungültige Organisation");
+      }
+      this.organisation = organisation;
+   }
 
-	// Setter Getter Projekt
-	public Collection<Projekt> getProjekt() {
-		return projekte;
-	}
+   // Setter Getter Projekt
+   public Collection<Projekt> getProjekt()
+   {
+      return projekte;
+   }
 
-	public void addProjekt(Projekt projekt) {
-		if (projekt == null || projekte.contains(projekt)) {
-			throw new IllegalArgumentException("Ungültiges Projekt");
-		}
-		this.projekte.add(projekt);
-	}
+   public void addProjekt(Projekt projekt)
+   {
+      if (projekt == null || projekte.contains(projekt))
+      {
+         throw new IllegalArgumentException("Ungültiges Projekt");
+      }
+      this.projekte.add(projekt);
+   }
 
-	public void removeProjekt(Projekt projekt) {
-		if (projekt == null || !projekte.contains(projekt)) {
-			throw new IllegalArgumentException("Ungültiges Projekt");
-		}
-		this.projekte.remove(projekt);
-	}
+   public void removeProjekt(Projekt projekt)
+   {
+      if (projekt == null || !projekte.contains(projekt))
+      {
+         throw new IllegalArgumentException("Ungültiges Projekt");
+      }
+      this.projekte.remove(projekt);
+   }
 
-	public String getVorname() {
-		return vorname;
-	}
+   public String getVorname()
+   {
+      return vorname;
+   }
 
-	public void setVorname(String vorname) {
-		if (vorname == null || vorname.isEmpty()) {
-			throw new IllegalArgumentException("Ungültiger Vorname");
-		}
-		this.vorname = vorname;
-	}
+   public void setVorname(String vorname)
+   {
+      if (vorname == null || vorname.isEmpty())
+      {
+         throw new IllegalArgumentException("Ungültiger Vorname");
+      }
+      this.vorname = vorname;
+   }
 
-	public String getContact() {
-		return contact;
-	}
+   public String getContact()
+   {
+      return email;
+   }
 
-	public void setContact(String contact) {
-		if (contact == null || contact.isEmpty()) {
-			throw new IllegalArgumentException("Ungültiger Vorname");
-		}
-		this.contact = contact;
-	}
+   public void setContact(String contact)
+   {
+      if (contact == null || contact.isEmpty())
+      {
+         throw new IllegalArgumentException("Ungültiger Vorname");
+      }
+      this.email = contact;
+   }
 
 }
