@@ -16,25 +16,21 @@ import javax.persistence.OneToOne;
 @Entity
 public class Projekt {
 
-	@Id
-	@GeneratedValue
 	private Integer projekt_id;
 
-	@Column
 	private String projektname;
 
-	@Column
 	private String projektskizze;
 
-	@Column
 	private String projektbeschreibung;
 
-	@OneToMany
 	private Collection<Student> studenten;
 
-	@OneToOne
-	@JoinColumn(name = "ansprechpartner_id")
 	private Ansprechpartner ansprechpartner;
+
+	private Projekt() {
+		// Hier gibt es nichts zusehn.
+	}
 
 	public Projekt(String projektname, String projektskizze, String projektbeschreibung, Collection<Student> studenten,
 			Ansprechpartner ansprechpartner) {
@@ -61,6 +57,17 @@ public class Projekt {
 		this.studenten = studenten;
 	}
 
+	@Id
+	@GeneratedValue
+	public Integer getProjekt_id() {
+		return projekt_id;
+	}
+
+	public void setProjekt_id(Integer projekt_id) {
+		this.projekt_id = projekt_id;
+	}
+
+	@Column
 	public String getProjektname() {
 		return projektname;
 	}
@@ -72,6 +79,7 @@ public class Projekt {
 		this.projektname = projektname;
 	}
 
+	@Column
 	public String getProjektskizze() {
 		return projektskizze;
 	}
@@ -83,19 +91,22 @@ public class Projekt {
 		this.projektskizze = projektskizze;
 	}
 
+	@Column
 	public String getProjektbeschreibung() {
 		return projektbeschreibung;
 	}
 
 	public void setProjektbeschreibung(String projektbeschreibung) {
-		if (projektbeschreibung == null || projektbeschreibung.equals("")) {
-			throw new IllegalArgumentException("Ungültige Projektbeschreibung");
-		}
 		this.projektbeschreibung = projektbeschreibung;
 	}
 
+	@OneToMany
 	public Collection<Student> getStudenten() {
 		return studenten;
+	}
+
+	public void setStudenten(Collection<Student> studenten) {
+		this.studenten = studenten;
 	}
 
 	public void addStudent(Student student) {
@@ -112,6 +123,8 @@ public class Projekt {
 		this.studenten.remove(student);
 	}
 
+	@OneToOne
+	@JoinColumn(name = "ansprechpartner_id", nullable = true)
 	public Ansprechpartner getAnsprechpartner() {
 		return ansprechpartner;
 	}

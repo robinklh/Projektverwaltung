@@ -62,19 +62,6 @@ public class Student implements Serializable {
 		this.vorname = new SimpleStringProperty(vorname);
 	}
 
-	// Setter Getter Nachname
-	@Column
-	public String getNachname() {
-		return nachname.get();
-	}
-
-	public void setNachname(String nachname) {
-		if (nachname == null || nachname.isEmpty()) {
-			throw new IllegalArgumentException("Ungültiger Nachname");
-		}
-		this.nachname = new SimpleStringProperty(nachname);
-	}
-
 	// Setter Getter Matrikelnummer
 	@Id
 	@Column
@@ -87,6 +74,19 @@ public class Student implements Serializable {
 			throw new IllegalArgumentException("Ungültiger Student");
 		}
 		this.matrikelnummer = new SimpleIntegerProperty(matrikelnummer);
+	}
+
+	// Setter Getter Nachname
+	@Column
+	public String getNachname() {
+		return nachname.get();
+	}
+
+	public void setNachname(String nachname) {
+		if (nachname == null || nachname.isEmpty()) {
+			throw new IllegalArgumentException("Ungültiger Nachname");
+		}
+		this.nachname = new SimpleStringProperty(nachname);
 	}
 
 	// Setter Getter Mail
@@ -105,7 +105,7 @@ public class Student implements Serializable {
 	// Setter Getter Projekt
 
 	@ManyToOne
-	@JoinColumn(name = "projekt_id")
+	@JoinColumn(name = "projekt_id", nullable = true)
 	public Projekt getProjekt() {
 		return projekt;
 	}
