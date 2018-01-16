@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+<<<<<<< HEAD
 public class ProfMainController implements Initializable
 {
    @FXML
@@ -92,4 +93,45 @@ public class ProfMainController implements Initializable
       });
 
    }
+=======
+public class ProfMainController implements Initializable {
+	@FXML
+	private Button btnProposal;
+
+	@FXML
+	private Button btnProject;
+
+	@FXML
+	private Button btnStudents;
+
+	@FXML
+	private Button btnCompany;
+
+	@FXML
+	private Button btnMeeting;
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		btnStudents.setOnAction(e -> {
+			try {
+				Scene scene = btnStudents.getScene();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowStudents.fxml"));
+				scene.setRoot(root);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
+
+		btnCompany.setOnAction(e -> {
+			try {
+				Scene scene = btnCompany.getScene();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowCompany.fxml"));
+				scene.setRoot(root);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
+
+	}
+>>>>>>> 3a6391f0fbac6c04746ed696c1e9664299fe2e03
 }
