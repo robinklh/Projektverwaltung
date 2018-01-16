@@ -1,7 +1,7 @@
 /**
  * 
  */
-package service;
+package database;
 
 import java.util.List;
 
@@ -15,13 +15,11 @@ import model.Student;
  *
  */
 public class StudentDAO {
-	EntityManager em;
 
-	public StudentDAO(EntityManager em) {
-		if (em == null) {
-			throw new NullPointerException("EntityManager should not be null.");
-		}
-		this.em = em;
+	private EntityManager em;
+
+	public StudentDAO() {
+		em = EntityManagerSingleton.getInstance();
 	}
 
 	/**
@@ -44,5 +42,22 @@ public class StudentDAO {
 	 */
 	public Student findStudentByMatrikelnummer(int matrikelnummer) {
 		return em.find(Student.class, matrikelnummer);
+	}
+
+	/**
+	 * Deletes a Student from the Database.
+	 * 
+	 * @param student
+	 *            to remove.
+	 */
+	public void deleteStudent(Student student) {
+		try {
+			em.getTransaction().begin();
+			em.remove(student);
+			em.getTransaction().commit();
+		} catch (Exception e1) {
+			System.out.println("failed to delete Student " + student.getMatrikelnummer());
+			em.getTransaction().rollback();
+		}
 	}
 }

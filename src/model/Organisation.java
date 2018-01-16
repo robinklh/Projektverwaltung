@@ -26,6 +26,7 @@ public class Organisation {
 	@Column
 	private String name;
 
+	@SuppressWarnings("unused")
 	private Organisation() {
 		// Hier gibt es nichts zu sehen.
 	}

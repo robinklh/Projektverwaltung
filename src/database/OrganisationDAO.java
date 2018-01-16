@@ -1,7 +1,7 @@
 /**
  * 
  */
-package service;
+package database;
 
 import java.util.List;
 

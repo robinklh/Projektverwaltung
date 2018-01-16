@@ -24,72 +24,54 @@ import model.Ansprechpartner;
 import model.Projekt;
 import model.Student;
 
-public class ShowProjectsController implements Initializable
-{
+public class ShowProjectsController implements Initializable {
 
-   @FXML
-   Label lblUsername;
+	@FXML
+	Label lblUsername;
 
-   @FXML
-   ListView<String> listViewProjects;
+	@FXML
+	ListView<String> listViewProjects;
 
-   @FXML
-   Button btnBack;
+	@FXML
+	Button btnBack;
 
-   private Collection<Student> students = new ArrayList<Student>();
+	private Collection<Student> students = new ArrayList<Student>();
 
-   @Override
-   public void initialize(URL location, ResourceBundle resources)
-   {
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
-      students.add(new Student("Sandra", "Wenzel", 1111111));
-      students.add(new Student("Fisch", "Kopf", 1111));
-      ObservableList<String> list = FXCollections
-            .observableArrayList(new Projekt("TestName", "TestSkizze",
-                  "TestBeschreibung", students,
-                  new Ansprechpartner("Meik", "Müller", "xxx@xxx.xx"))
-                        .getProjektname());
+		students.add(new Student("Sandra", "Wenzel", 1111111, "s.w@gmx.de"));
+		students.add(new Student("Fisch", "Kopf", 1111, "f.k@web.de"));
+		ObservableList<String> list = FXCollections.observableArrayList(new Projekt("TestName", "TestSkizze",
+				"TestBeschreibung", students, new Ansprechpartner("Meik", "Müller", "xxx@xxx.xx")).getProjektname());
 
-      listViewProjects.setItems(list);
+		listViewProjects.setItems(list);
 
-      btnBack.setOnAction(e -> {
-         try
-         {
-            Scene scene = btnBack.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/ProfMain.fxml"));
-            scene.setRoot(root);
-         }
-         catch (IOException e1)
-         {
-            e1.printStackTrace();
-         }
-      });
+		btnBack.setOnAction(e -> {
+			try {
+				Scene scene = btnBack.getScene();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ProfMain.fxml"));
+				scene.setRoot(root);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 
-      listViewProjects.getSelectionModel()
-            .setSelectionMode(SelectionMode.SINGLE);
-      listViewProjects.setOnMousePressed(new EventHandler<MouseEvent>()
-      {
-         @Override
-         public void handle(MouseEvent event)
-         {
-            if (event.getButton() == MouseButton.PRIMARY
-                  && event.getClickCount() == 2)
-            {
-               try
-               {
-                  Scene scene = btnBack.getScene();
-                  AnchorPane root = FXMLLoader.load(
-                        getClass().getResource("../view/ShowProject.fxml"));
-                  scene.setRoot(root);
-               }
-               catch (IOException e1)
-               {
-                  e1.printStackTrace();
-               }
-            }
-         }
-      });
-   }
+		listViewProjects.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+		listViewProjects.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				if (event.getButton() == MouseButton.PRIMARY && event.getClickCount() == 2) {
+					try {
+						Scene scene = btnBack.getScene();
+						AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowProject.fxml"));
+						scene.setRoot(root);
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}
+			}
+		});
+	}
 
 }

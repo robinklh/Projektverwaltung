@@ -13,7 +13,7 @@
             <Button fx:id="btnProposal" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Anträge" />
             <Button fx:id="btnProject" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Projekte" />
             <Button fx:id="btnStudents" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Studenten" />
-            <Button fx:id="btnCompany" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Unternehmen" />
+            <Button fx:id="btnOrganisation" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Unternehmen" />
             <Button fx:id="btnMeeting" mnemonicParsing="false" prefHeight="40.0" prefWidth="196.0" text="Termine" />
          </children>
       </VBox>
