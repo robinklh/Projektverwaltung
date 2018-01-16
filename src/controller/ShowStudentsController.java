@@ -67,7 +67,7 @@ public class ShowStudentsController implements Initializable {
 	 * 
 	 * @return
 	 */
-	public List<Student> getStudents() {
+	private List<Student> getStudents() {
 		List<Student> results = new ArrayList<>();
 		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("projektverwaltung");
 		final EntityManager entityManager = entityManagerFactory.createEntityManager();

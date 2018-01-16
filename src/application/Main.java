@@ -1,7 +1,5 @@
 package application;
 
-import javax.persistence.EntityManager;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -23,12 +21,7 @@ public class Main extends Application {
 	}
 
 	public static void main(String[] args) {
-
 		launch(args);
 	}
 
-	private static void performJPAActions(EntityManager entityManager) {
-		// TODO Auto-generated method stub
-
-	}
 }
