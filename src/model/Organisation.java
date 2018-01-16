@@ -20,11 +20,15 @@ public class Organisation {
 	@GeneratedValue
 	private Integer organisation_id;
 
-	@OneToMany
+	@OneToMany(mappedBy = "organisation")
 	private Collection<Ansprechpartner> mitglieder;
 
 	@Column
 	private String name;
+
+	private Organisation() {
+		// Hier gibt es nichts zu sehen.
+	}
 
 	public Organisation(String name) {
 		if (name == null || name.isEmpty()) {

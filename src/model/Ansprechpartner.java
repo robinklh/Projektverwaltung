@@ -29,14 +29,18 @@ public class Ansprechpartner {
 	private String vorname;
 
 	@Column
-	private String contact;
+	private String mail;
 
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "organisation_id")
 	private Organisation organisation;
 
-	@OneToMany
+	@OneToMany(mappedBy = "ansprechpartner")
 	private Collection<Projekt> projekte;
+
+	private Ansprechpartner() {
+		// Hier gibt es nichts zu sehen
+	}
 
 	public Ansprechpartner(String vorname, String nachname, String contact) {
 		if (nachname == null || nachname.isEmpty()) {
@@ -46,7 +50,7 @@ public class Ansprechpartner {
 			throw new IllegalArgumentException("Ungültiger Vorname.");
 		}
 
-		this.contact = contact;
+		this.mail = contact;
 		this.vorname = vorname;
 		this.nachname = nachname;
 		this.projekte = new ArrayList<Projekt>();
@@ -61,6 +65,7 @@ public class Ansprechpartner {
 		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException("Ungültiger name");
 		}
+
 		this.nachname = name;
 	}
 
@@ -107,14 +112,14 @@ public class Ansprechpartner {
 	}
 
 	public String getContact() {
-		return contact;
+		return mail;
 	}
 
 	public void setContact(String contact) {
 		if (contact == null || contact.isEmpty()) {
 			throw new IllegalArgumentException("Ungültiger Vorname");
 		}
-		this.contact = contact;
+		this.mail = contact;
 	}
 
 }

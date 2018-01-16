@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -23,6 +22,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import model.Student;
+import service.StudentDAO;
 
 public class ShowStudentsController implements Initializable {
 	@FXML
@@ -72,17 +72,9 @@ public class ShowStudentsController implements Initializable {
 		final EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("projektverwaltung");
 		final EntityManager entityManager = entityManagerFactory.createEntityManager();
 		try {
-			entityManager.getTransaction().begin();
-			TypedQuery<Object[]> query = entityManager
-					.createQuery("SELECT s.vorname, s.nachname, s.matrikelnummer FROM Student s", Object[].class);
-			List<Object[]> resultsList = query.getResultList();
-			for (Object[] result : resultsList) {
-				results.add(new Student((String) result[0], (String) result[1], (Integer) result[2]));
-			}
-
-			entityManager.getTransaction().commit();
+			StudentDAO dao = new StudentDAO(entityManager);
+			results = dao.findAllStudents();
 		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
 			System.out.println("there was a problem: " + e.getMessage());
 
 		} finally {

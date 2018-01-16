@@ -100,7 +100,7 @@ public class Projekt {
 		this.projektbeschreibung = projektbeschreibung;
 	}
 
-	@OneToMany
+	@OneToMany(mappedBy = "projekt")
 	public Collection<Student> getStudenten() {
 		return studenten;
 	}

@@ -104,16 +104,13 @@ public class Student implements Serializable {
 
 	// Setter Getter Projekt
 
-	@ManyToOne
+	@ManyToOne(optional = true)
 	@JoinColumn(name = "projekt_id", nullable = true)
 	public Projekt getProjekt() {
 		return projekt;
 	}
 
 	public void setProjekt(Projekt projekt) {
-		if (projekt == null) {
-			throw new IllegalArgumentException("Ungültiges Projekt");
-		}
 		this.projekt = projekt;
 	}
 
