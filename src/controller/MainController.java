@@ -13,55 +13,59 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-//Hier wird der Login ausgeführt noch ist das hier Tod und es wird nur Weitergeleitet
-public class MainController implements Initializable
-{
+/**
+ * Hier wird der Login ausgeführt noch ist das hier Tot und es wird nur
+ * Weitergeleitet.
+ * 
+ * @author robinklh
+ *
+ */
+public class MainController implements Initializable {
 
-   @FXML
-   Button btnOK;
+	@FXML
+	Button btnOK;
 
-   @FXML
-   Button btnStudent;
+	@FXML
+	Button btnStudent;
 
-   @FXML
-   Button btnProfessor;
+	@FXML
+	Button btnProfessor;
 
-   @FXML
-   PasswordField password;
+	@FXML
+	PasswordField password;
 
-   @FXML
-   TextField txtfieldName;
+	@FXML
+	TextField txtfieldName;
 
-   @Override
-   public void initialize(URL location, ResourceBundle resources)
-   {
-      btnStudent.setOnAction(e -> {
-         try
-         {
-            Scene scene = btnStudent.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/StudentMain.fxml"));
-            scene.setRoot(root);
-         }
-         catch (IOException e1)
-         {
-            e1.printStackTrace();
-         }
-      });
+	/**
+	 * initializes the Main-View, which opens at the Applicationstart. At the
+	 * moment there is no login. So 2 buttons are used to show the student- and
+	 * the professor-part of the application.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		btnOK.setOnAction(e -> {
+			// handleLogin.
+		});
+		btnStudent.setOnAction(e -> {
+			try {
+				Scene scene = btnStudent.getScene();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/StudentMain.fxml"));
+				scene.setRoot(root);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 
-      btnProfessor.setOnAction(e -> {
-         try
-         {
-            Scene scene = btnProfessor.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/ProfMain.fxml"));
-            scene.setRoot(root);
-         }
-         catch (IOException e1)
-         {
-            e1.printStackTrace();
-         }
-      });
-   }
+		btnProfessor.setOnAction(e -> {
+			try {
+				Scene scene = btnProfessor.getScene();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ProfMain.fxml"));
+				scene.setRoot(root);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
+	}
 
 }

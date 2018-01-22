@@ -1,6 +1,3 @@
-/**
- * 
- */
 package database;
 
 import java.util.List;
@@ -14,13 +11,21 @@ import javafx.scene.control.Alert.AlertType;
 import model.Student;
 
 /**
- * @author Robin
+ * <p>
+ * Data-Access-Object
+ * </p>
+ * for the entity Student.
+ * 
+ * @author robinklh
  *
  */
 public class StudentDAO {
 
 	private EntityManager em;
 
+	/**
+	 * gets the instance of the entitymanager needed.
+	 */
 	public StudentDAO() {
 		em = EntityManagerSingleton.getInstance();
 	}
@@ -64,6 +69,12 @@ public class StudentDAO {
 		}
 	}
 
+	/**
+	 * Updates a Student from the Database.
+	 * 
+	 * @param student
+	 *            to update.
+	 */
 	public void updateStudent(Student student) {
 		try {
 			Student oldStudent = findStudentByMatrikelnummer(student.getMatrikelnummer());
@@ -79,6 +90,12 @@ public class StudentDAO {
 		}
 	}
 
+	/**
+	 * Inserts a Student into the Database.
+	 * 
+	 * @param student
+	 *            to insert.
+	 */
 	public void insertStudent(Student student) {
 		final EntityManager entityManager = EntityManagerSingleton.getInstance();
 		try {

@@ -1,39 +1,58 @@
 package database;
 
-public final class Session
-{
+/**
+ * <p>
+ * The Session implemented as a Singleton.
+ * </p>
+ * .
+ * 
+ * @author memue
+ */
+public final class Session {
 
-   private static Object clipboard;
+	private static Object clipboard;
 
-   private static Session session;
+	private static Session session;
 
-   private Session()
-   {
-      // Hier gibt es nichts zu sehen
-   }
+	private Session() {
+		// Hier gibt es nichts zu sehen
+	}
 
-   public static Session getInstance()
-   {
-      if (session == null)
-      {
-         session = new Session();
-      }
-      return session;
-   }
+	/**
+	 * If no session exists, a session will be created.
+	 * 
+	 * @return the instance of the session.
+	 */
+	public static Session getInstance() {
+		if (session == null) {
+			session = new Session();
+		}
+		return session;
+	}
 
-   public Object getClipboard()
-   {
-      return clipboard;
-   }
+	/**
+	 * Most likely will contain the Object that has to be edited.
+	 * 
+	 * @return the stored Object inside the Session.
+	 */
+	public Object getClipboard() {
+		return clipboard;
+	}
 
-   public void removeClipboard()
-   {
-      clipboard = null;
-   }
+	/**
+	 * Clears the clipboard. Used after editing a Object.
+	 */
+	public void removeClipboard() {
+		clipboard = null;
+	}
 
-   public void setClipboard(Object newClipboard)
-   {
-      clipboard = newClipboard;
-   }
+	/**
+	 * 
+	 * @param newClipboard
+	 *            Object that shall be edited.
+	 */
+	public void setClipboard(Object newClipboard) {
+		clipboard = newClipboard;
+	}
 
 }

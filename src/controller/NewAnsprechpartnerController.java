@@ -12,35 +12,40 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
-public class NewAnsprechpartnerController implements Initializable
-{
+public class NewAnsprechpartnerController implements Initializable {
 
-   @FXML
-   Label lblUsername;
+	@FXML
+	Label lblUsername;
 
-   @FXML
-   Button btnSave;
+	@FXML
+	Button btnSave;
 
-   @FXML
-   Button btnCancel;
+	@FXML
+	Button btnCancel;
 
-   @Override
-   public void initialize(URL location, ResourceBundle resources)
-   {
-      btnCancel.setOnAction(e -> {
-         try
-         {
-            Scene scene = btnCancel.getScene();
-            AnchorPane root = FXMLLoader.load(
-                  getClass().getResource("../view/ShowAnsprechpartner.fxml"));
-            scene.setRoot(root);
-         }
-         catch (IOException e1)
-         {
-            e1.printStackTrace();
-         }
-      });
+	/**
+	 * Initializes the Components of the NewAnsprechpartner-view.
+	 */
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		btnCancel.setOnAction(e -> {
+			backToShowAnsprechpartner();
+		});
 
-   }
+		btnSave.setOnAction(e -> {
+			// save
+			backToShowAnsprechpartner();
+		});
 
+	}
+
+	private void backToShowAnsprechpartner() {
+		try {
+			Scene scene = btnCancel.getScene();
+			AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowAnsprechpartner.fxml"));
+			scene.setRoot(root);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+	}
 }
