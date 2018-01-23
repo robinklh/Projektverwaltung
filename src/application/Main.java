@@ -1,7 +1,9 @@
 package application;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import database.EntityManagerSingleton;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -32,14 +34,13 @@ public class Main extends Application {
 			primaryStage.setScene(scene);
 			primaryStage.show();
 
-			// primaryStage.setOnCloseRequest(e -> {
-			// try {
-			// EntityManagerSingleton.destroy();
-			// } catch (Exception e1) {
-			// logger.log(Level.SEVERE, "Die EntitymanagerFactory konnte nicht
-			// geschlossen werden.", e1);
-			// }
-			// });
+			primaryStage.setOnCloseRequest(e -> {
+				try {
+					EntityManagerSingleton.destroy();
+				} catch (Exception e1) {
+					logger.log(Level.SEVERE, "Die EntitymanagerFactory konnte nicht geschlossen werden.", e1);
+				}
+			});
 
 		} catch (Exception e) {
 			e.printStackTrace();

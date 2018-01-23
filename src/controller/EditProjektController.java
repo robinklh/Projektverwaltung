@@ -19,95 +19,72 @@ import javafx.scene.layout.AnchorPane;
 import model.Projekt;
 import model.Student;
 
-public class ShowAntragController implements Initializable {
-
-	@FXML
-	TextField txtfieldTitel;
-
-	@FXML
-	TextArea txtAreaDescription;
-
-	@FXML
-	TextArea txtAreaSkizze;
-
-	@FXML
-	TextField txtfieldAnsprechpartner;
-
-	@FXML
-	TextField txtfieldStudentOne;
-
-	@FXML
-	TextField txtfieldStudentTwo;
-
-	@FXML
-	TextArea txtAreaComment;
-
-	@FXML
-	Button btnCancel;
-
-	@FXML
-	Button btnAccept;
-
-	@FXML
-	Button btnDecline;
+/**
+ * @author robinklh
+ *
+ */
+public class EditProjektController implements Initializable {
 
 	@FXML
 	Label lblUsername;
-
+	@FXML
+	TextField txtfieldTitel;
+	@FXML
+	TextArea txtAreaSkizze;
+	@FXML
+	TextField txtfieldStudentOne;
+	@FXML
+	Button btnCancel;
+	@FXML
+	Button btnSave;
+	@FXML
+	TextArea txtAreaComment;
+	@FXML
+	TextField txtfieldAnsprechpartner;
 	@FXML
 	TextField txtfieldStudentThree;
+	@FXML
+	TextArea txtAreaDescription;
+	@FXML
+	TextField txtfieldStudentTwo;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		showAntrag();
-
 		btnCancel.setOnAction(e -> {
-			handleBack();
+			backToStudentMain();
 		});
-
-		btnAccept.setOnAction(e -> {
-			acceptProject();
-			handleBack();
+		btnSave.setOnAction(e -> {
+			saveProject();
+			backToStudentMain();
 		});
-
-		btnDecline.setOnAction(e -> {
-			declineProject();
-			handleBack();
-		});
-
 	}
 
-	private void declineProject() {
+	private void saveProject() {
 		ProjektDAO projektDao = new ProjektDAO();
 		Session session = Session.getInstance();
-		Projekt projekt = (Projekt) session.getClipboard();
-		if (txtAreaComment.getText().isEmpty()) {
-			projektDao.deleteProjekt(projekt);
-		} else {
-			projekt.setProjektname(txtfieldTitel.getText());
-			projekt.setProjektskizze(txtAreaSkizze.getText());
-			projekt.setProjektbeschreibung(txtAreaDescription.getText());
-			projekt.setAnmerkung(txtAreaComment.getText());
-			projekt.setStatus("abgelehnt");
-			projektDao.updateProject(projekt);
-		}
-	}
-
-	private void acceptProject() {
-		ProjektDAO projektDao = new ProjektDAO();
-		Session session = Session.getInstance();
-		Projekt projekt = (Projekt) session.getClipboard();
+		Projekt projekt = ((Student) session.getLoggedInUser()).getProjekt();
 		projekt.setProjektname(txtfieldTitel.getText());
 		projekt.setProjektskizze(txtAreaSkizze.getText());
 		projekt.setProjektbeschreibung(txtAreaDescription.getText());
 		projekt.setAnmerkung(txtAreaComment.getText());
-		projekt.setStatus("angenommen");
+		projekt.setStatus("bearbeitung");
 		projektDao.updateProject(projekt);
+	}
+
+	private void backToStudentMain() {
+		try {
+			Scene scene = btnCancel.getScene();
+			AnchorPane root = FXMLLoader.load(getClass().getResource("../view/StudentMain.fxml"));
+			scene.setRoot(root);
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 	}
 
 	private void showAntrag() {
 		Session session = Session.getInstance();
-		Projekt projekt = (Projekt) session.getClipboard();
+		Projekt projekt = ((Student) session.getLoggedInUser()).getProjekt();
 
 		txtfieldTitel.setText(projekt.getProjektname());
 		txtAreaSkizze.setText(projekt.getProjektskizze());
@@ -124,19 +101,16 @@ public class ShowAntragController implements Initializable {
 		txtfieldStudentOne.setDisable(true);
 		txtfieldStudentTwo.setDisable(true);
 		txtfieldStudentThree.setDisable(true);
+		txtAreaComment.setDisable(true);
 
-		txtAreaComment.setText("");
-	}
-
-	private void handleBack() {
-		try {
-			Session session = Session.getInstance();
-			session.removeClipboard();
-			Scene scene = btnCancel.getScene();
-			AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowAnträge.fxml"));
-			scene.setRoot(root);
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if (!projekt.getStatus().equals("abgelehnt")) {
+			txtAreaDescription.setDisable(true);
+			txtAreaSkizze.setDisable(true);
+			txtfieldAnsprechpartner.setDisable(true);
+			txtfieldTitel.setDisable(true);
+			btnSave.setVisible(false);
 		}
+
+		txtAreaComment.setText(projekt.getAnmerkung());
 	}
 }

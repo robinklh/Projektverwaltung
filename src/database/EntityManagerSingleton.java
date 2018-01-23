@@ -23,11 +23,12 @@ public class EntityManagerSingleton {
 	}
 
 	public static void destroy() throws Exception {
-		if (factory != null) {
-			factory.close();
-		}
+
 		if (entitymanager != null) {
 			entitymanager.close();
+		}
+		if (factory != null) {
+			factory.close();
 		}
 	}
 

@@ -17,76 +17,68 @@ import javafx.scene.layout.AnchorPane;
 import model.Projekt;
 import model.Student;
 
-public class ShowProjectController implements Initializable
-{
+public class ShowProjectController implements Initializable {
 
-   @FXML
-   TextField txtfieldTitel;
+	@FXML
+	TextField txtfieldTitel;
 
-   @FXML
-   TextArea txtAreaDescription;
+	@FXML
+	TextArea txtAreaDescription;
 
-   @FXML
-   TextArea txtAreaSkizze;
+	@FXML
+	TextArea txtAreaSkizze;
 
-   @FXML
-   TextField txtfieldAnsprechpartner;
+	@FXML
+	TextField txtfieldAnsprechpartner;
 
-   @FXML
-   TextField txtfieldSutdentOne;
+	@FXML
+	TextField txtfieldSutdentOne;
 
-   @FXML
-   TextField txtfieldStudentTwo;
+	@FXML
+	TextField txtfieldStudentTwo;
 
-   @FXML
-   Button btnCancel;
+	@FXML
+	Button btnCancel;
 
-   @FXML
-   TextField txtfieldStudentThree;
+	@FXML
+	TextField txtfieldStudentThree;
 
-   @Override
-   public void initialize(URL location, ResourceBundle resources)
-   {
-      btnCancel.setOnAction(e -> {
-         try
-         {
-            Scene scene = btnCancel.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/ShowProjects.fxml"));
-            scene.setRoot(root);
-         }
-         catch (IOException e1)
-         {
-            e1.printStackTrace();
-         }
-      });
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		btnCancel.setOnAction(e -> {
+			try {
+				Scene scene = btnCancel.getScene();
+				AnchorPane root = FXMLLoader.load(getClass().getResource("../view/ShowProjects.fxml"));
+				scene.setRoot(root);
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+		});
 
-      showProject();
+		showProject();
 
-   }
+	}
 
-   private void showProject()
-   {
-      Session session = Session.getInstance();
-      Projekt projekt = (Projekt) session.getClipboard();
+	private void showProject() {
+		Session session = Session.getInstance();
 
-      txtfieldTitel.setText(projekt.getProjektname());
-      txtAreaSkizze.setText(projekt.getProjektskizze());
-      txtAreaDescription.setText(projekt.getProjektbeschreibung());
-      txtfieldAnsprechpartner
-            .setText(projekt.getAnsprechpartner().toString());
+		Projekt projekt = (Projekt) session.getClipboard();
 
-      ArrayList<Student> studenten = new ArrayList<>(projekt.getStudenten());
+		txtfieldTitel.setText(projekt.getProjektname());
+		txtAreaSkizze.setText(projekt.getProjektskizze());
+		txtAreaDescription.setText(projekt.getProjektbeschreibung());
+		txtfieldAnsprechpartner.setText(projekt.getAnsprechpartner().toString());
 
-      txtfieldSutdentOne.setText(studenten.get(0).toString());
-      txtfieldStudentTwo.setText(studenten.get(1).toString());
-      if (projekt.getStudenten().size() == 3)
-      {
-         txtfieldStudentThree.setText(studenten.get(2).toString());
-      }
-      txtfieldSutdentOne.setDisable(true);
-      txtfieldStudentTwo.setDisable(true);
-      txtfieldStudentThree.setDisable(true);
-   }
+		ArrayList<Student> studenten = new ArrayList<>(projekt.getStudenten());
+
+		txtfieldSutdentOne.setText(studenten.get(0).toString());
+		txtfieldStudentTwo.setText(studenten.get(1).toString());
+		if (projekt.getStudenten().size() == 3) {
+			txtfieldStudentThree.setText(studenten.get(2).toString());
+		}
+		txtfieldSutdentOne.setDisable(true);
+		txtfieldStudentTwo.setDisable(true);
+		txtfieldStudentThree.setDisable(true);
+	}
 
 }
