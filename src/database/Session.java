@@ -8,51 +8,81 @@ package database;
  * 
  * @author memue
  */
-public final class Session {
+public final class Session
+{
 
-	private static Object clipboard;
+   private static Object clipboard;
 
-	private static Session session;
+   private static Session session;
 
-	private Session() {
-		// Hier gibt es nichts zu sehen
-	}
+   private static Object loggedInUser;
 
-	/**
-	 * If no session exists, a session will be created.
-	 * 
-	 * @return the instance of the session.
-	 */
-	public static Session getInstance() {
-		if (session == null) {
-			session = new Session();
-		}
-		return session;
-	}
+   private Session()
+   {
+      // Hier gibt es nichts zu sehen
+   }
 
-	/**
-	 * Most likely will contain the Object that has to be edited.
-	 * 
-	 * @return the stored Object inside the Session.
-	 */
-	public Object getClipboard() {
-		return clipboard;
-	}
+   /**
+    * If no session exists, a session will be created.
+    * 
+    * @return the instance of the session.
+    */
+   public static Session getInstance()
+   {
+      if (session == null)
+      {
+         session = new Session();
+      }
+      return session;
+   }
 
-	/**
-	 * Clears the clipboard. Used after editing a Object.
-	 */
-	public void removeClipboard() {
-		clipboard = null;
-	}
+   /**
+    * Most likely will contain the Object that has to be edited.
+    * 
+    * @return the stored Object inside the Session.
+    */
+   public Object getClipboard()
+   {
+      return clipboard;
+   }
 
-	/**
-	 * 
-	 * @param newClipboard
-	 *            Object that shall be edited.
-	 */
-	public void setClipboard(Object newClipboard) {
-		clipboard = newClipboard;
-	}
+   /**
+    * Clears the clipboard. Used after editing a Object.
+    */
+   public void removeClipboard()
+   {
+      clipboard = null;
+   }
+
+   /**
+    * 
+    * @param newClipboard
+    *           Object that shall be edited.
+    */
+   public void setClipboard(Object newClipboard)
+   {
+      clipboard = newClipboard;
+   }
+
+   /**
+    * Getter for property loggedInUser.
+    * 
+    * @return Returns the loggedInUser.
+    */
+   public Object getLoggedInUser()
+   {
+      return loggedInUser;
+   }
+
+   /**
+    * Setter for property loggedInUser.
+    *
+    * @param loggedInUser
+    *           The loggedInUser to set.
+    */
+   public void setLoggedInUser(Object loggedInUser)
+   {
+      Session.loggedInUser = loggedInUser;
+   }
 
 }

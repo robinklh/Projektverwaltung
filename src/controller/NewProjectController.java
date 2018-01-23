@@ -2,8 +2,16 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
+import database.AnsprechpartnerDAO;
+import database.ProjektDAO;
+import database.Session;
+import database.StudentDAO;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +23,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import model.Ansprechpartner;
+import model.Projekt;
 import model.Student;
 
 public class NewProjectController implements Initializable
@@ -33,13 +42,13 @@ public class NewProjectController implements Initializable
    TextField txtfieldTitel;
 
    @FXML
-   TextArea txtAreaDescription;
-
-   @FXML
    TextArea txtAreaSkizze;
 
    @FXML
-   ComboBox<Ansprechpartner> comboContact;
+   TextArea txtAreaDescription;
+
+   @FXML
+   ComboBox<Ansprechpartner> comboAnsprechpartner;
 
    @FXML
    ComboBox<Student> comboStudentOne;
@@ -47,32 +56,77 @@ public class NewProjectController implements Initializable
    @FXML
    ComboBox<Student> comboStudentTwo;
 
-   @FXML
-   TextField txtfieldAnsprechpartner;
+   private ObservableList<Student> studentList;
 
-   @FXML
-   TextField txtfieldSutdentOne;
-
-   @FXML
-   TextField txtfieldStudentTwo;
+   private ObservableList<Ansprechpartner> ansprechpartnerList;
 
    @Override
    public void initialize(URL location, ResourceBundle resources)
    {
       btnCancel.setOnAction(e -> {
-         try
-         {
-            Scene scene = btnCancel.getScene();
-            AnchorPane root = FXMLLoader
-                  .load(getClass().getResource("../view/StudentMain.fxml"));
-            scene.setRoot(root);
-         }
-         catch (IOException e1)
-         {
-            e1.printStackTrace();
-         }
+         backToStudentMain();
       });
 
+      fillcomboboxes();
+
+      btnSave.setOnAction(e -> {
+         saveProject();
+         backToStudentMain();
+      });
+
+   }
+
+   private void fillcomboboxes()
+   {
+      StudentDAO studentDao = new StudentDAO();
+      AnsprechpartnerDAO ansprechpartnerDao = new AnsprechpartnerDAO();
+      studentList = FXCollections
+            .observableArrayList(studentDao.findStudentsWithoutProject());
+      comboStudentOne.setItems(studentList);
+      comboStudentTwo.setItems(studentList);
+      ansprechpartnerList = FXCollections
+            .observableArrayList(ansprechpartnerDao.findallAnsprechpartner());
+      comboAnsprechpartner.setItems(ansprechpartnerList);
+   }
+
+   private void saveProject()
+   {
+      String projekttitel = txtfieldTitel.getText();
+      String projekskizze = txtAreaSkizze.getText();
+      String projektbeschreibung = txtAreaDescription.getText();
+      Ansprechpartner ansprechpartner = comboAnsprechpartner.getValue();
+      Collection<Student> students = new ArrayList<>();
+      students.add(comboStudentOne.getValue());
+
+      if (comboStudentTwo.getSelectionModel().getSelectedItem() != null)
+      {
+         students.add(comboStudentTwo.getValue());
+      }
+      Student loggedInStudent = (Student) Session.getInstance()
+            .getLoggedInUser();
+      students.add(loggedInStudent);
+
+      Projekt projekt = new Projekt(projekttitel, projekskizze,
+            projektbeschreibung, students, ansprechpartner);
+
+      ProjektDAO projektDao = new ProjektDAO();
+      projektDao.insertProject(projekt);
+
+   }
+
+   private void backToStudentMain()
+   {
+      try
+      {
+         Scene scene = btnCancel.getScene();
+         AnchorPane root = FXMLLoader
+               .load(getClass().getResource("../view/StudentMain.fxml"));
+         scene.setRoot(root);
+      }
+      catch (IOException e1)
+      {
+         e1.printStackTrace();
+      }
    }
 
 }

@@ -139,4 +139,12 @@ public class Student implements Serializable
       this.projekt = projekt;
    }
 
+   @Override
+   public String toString()
+   {
+      return this.getMatrikelnummer() + " - " + this.getVorname() + " "
+            + this.getNachname();
+
+   }
+
 }

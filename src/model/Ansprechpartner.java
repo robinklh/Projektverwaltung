@@ -145,4 +145,10 @@ public class Ansprechpartner
       this.mail = contact;
    }
 
+   @Override
+   public String toString()
+   {
+      return this.vorname + " " + this.nachname;
+   }
+
 }

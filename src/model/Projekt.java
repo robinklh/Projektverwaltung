@@ -5,10 +5,13 @@ import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+
+import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Ein Projekt das im Rahmen des Studiums von Studenten durchgeführt wird.
@@ -20,7 +23,7 @@ public class Projekt
 
    private Integer projekt_id;
 
-   private String projektname;
+   private SimpleStringProperty projektname;
 
    private String projektskizze;
 
@@ -29,6 +32,10 @@ public class Projekt
    private Collection<Student> studenten;
 
    private Ansprechpartner ansprechpartner;
+
+   private String status;
+
+   private String Anmerkung;
 
    @SuppressWarnings("unused")
    private Projekt()
@@ -63,13 +70,14 @@ public class Projekt
       this.ansprechpartner = ansprechpartner;
       ansprechpartner.addProjekt(this);
       this.projektbeschreibung = projektbeschreibung;
-      this.projektname = projektname;
+      this.projektname = new SimpleStringProperty(projektname);
       this.projektskizze = projektskizze;
       this.studenten = studenten;
+      this.status = "bearbeitung";
    }
 
    @Id
-   @GeneratedValue
+   @GeneratedValue(strategy = GenerationType.IDENTITY)
    public Integer getProjekt_id()
    {
       return projekt_id;
@@ -83,7 +91,7 @@ public class Projekt
    @Column
    public String getProjektname()
    {
-      return projektname;
+      return projektname.get();
    }
 
    public void setProjektname(String projektname)
@@ -92,7 +100,7 @@ public class Projekt
       {
          throw new IllegalArgumentException("Ungültiger Projektname");
       }
-      this.projektname = projektname;
+      this.projektname = new SimpleStringProperty(projektname);
    }
 
    @Column
@@ -166,4 +174,53 @@ public class Projekt
       this.ansprechpartner = ansprechpartner;
    }
 
+   /**
+    * Getter for property status.
+    * 
+    * @return Returns the status.
+    */
+   @Column
+   public String getStatus()
+   {
+      return status;
+   }
+
+   /**
+    * Setter for property status.
+    *
+    * @param status
+    *           The status to set.
+    */
+   public void setStatus(String status)
+   {
+      this.status = status;
+   }
+
+   @Override
+   public String toString()
+   {
+      return this.getProjektname();
+   }
+
+   /**
+    * Getter for property anmerkung.
+    * 
+    * @return Returns the anmerkung.
+    */
+   @Column
+   public String getAnmerkung()
+   {
+      return Anmerkung;
+   }
+
+   /**
+    * Setter for property anmerkung.
+    *
+    * @param anmerkung
+    *           The anmerkung to set.
+    */
+   public void setAnmerkung(String anmerkung)
+   {
+      Anmerkung = anmerkung;
+   }
 }

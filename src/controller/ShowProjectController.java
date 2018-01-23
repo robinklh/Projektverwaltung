@@ -2,8 +2,10 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import database.Session;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import model.Projekt;
+import model.Student;
 
 public class ShowProjectController implements Initializable
 {
@@ -37,6 +41,9 @@ public class ShowProjectController implements Initializable
    @FXML
    Button btnCancel;
 
+   @FXML
+   TextField txtfieldStudentThree;
+
    @Override
    public void initialize(URL location, ResourceBundle resources)
    {
@@ -54,14 +61,32 @@ public class ShowProjectController implements Initializable
          }
       });
 
-      txtfieldTitel.setText("Test Titel");
-      txtAreaSkizze.setText("Hier kommt die Skizze");
-      txtAreaDescription.setText(
-            "Das ist eine sehr schöne und sehr lange Beschreibung für das Projekt");
-      txtfieldAnsprechpartner.setText("Frank Fischer");
-      txtfieldSutdentOne.setText("Sandra Wenzel");
-      txtfieldStudentTwo.setText("Fisch Kopf");
+      showProject();
 
+   }
+
+   private void showProject()
+   {
+      Session session = Session.getInstance();
+      Projekt projekt = (Projekt) session.getClipboard();
+
+      txtfieldTitel.setText(projekt.getProjektname());
+      txtAreaSkizze.setText(projekt.getProjektskizze());
+      txtAreaDescription.setText(projekt.getProjektbeschreibung());
+      txtfieldAnsprechpartner
+            .setText(projekt.getAnsprechpartner().toString());
+
+      ArrayList<Student> studenten = new ArrayList<>(projekt.getStudenten());
+
+      txtfieldSutdentOne.setText(studenten.get(0).toString());
+      txtfieldStudentTwo.setText(studenten.get(1).toString());
+      if (projekt.getStudenten().size() == 3)
+      {
+         txtfieldStudentThree.setText(studenten.get(2).toString());
+      }
+      txtfieldSutdentOne.setDisable(true);
+      txtfieldStudentTwo.setDisable(true);
+      txtfieldStudentThree.setDisable(true);
    }
 
 }
