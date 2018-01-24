@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ShowStudentsController">
+   <children>
+      <Label fx:id="lblUsername" alignment="CENTER_RIGHT" layoutX="220.0" layoutY="46.0" prefHeight="39.0" prefWidth="167.0" text="Hans Wurscht" />
+      <TableView fx:id="tableStudents" layoutX="46.0" layoutY="103.0" prefHeight="472.0" prefWidth="360.0">
+        <columns>
+          <TableColumn fx:id="columnPrename" prefWidth="120.0" text="Vorname" />
+          <TableColumn fx:id="columnName" prefWidth="120.0" text="Name" />
+            <TableColumn fx:id="columnNumber" prefWidth="120.0" text="Matrikelnummer" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnBack" layoutX="318.0" layoutY="592.0" mnemonicParsing="false" text="Zurück" />
+      <Button fx:id="btnNew" layoutX="244.0" layoutY="592.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="60.0" text="Neu" />
+      <Button fx:id="btnEdit" layoutX="141.0" layoutY="592.0" mnemonicParsing="false" text="Bearbeiten" />
+      <Button fx:id="btnDelete" layoutX="46.0" layoutY="592.0" mnemonicParsing="false" text="Löschen" />
+   </children>
+</AnchorPane>
